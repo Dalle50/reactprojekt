@@ -16,7 +16,7 @@ function Login({ onLogin }) {
       });
 
       const data = await response.json();
-      console.log(data)
+    //   console.log(data)
       if (!response.ok || !data.success) {
         throw new Error(data.error || "Invalid credentials");
       }
