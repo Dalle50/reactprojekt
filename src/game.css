@@ -1,0 +1,47 @@
+.grid-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(25, 48px); /* repeat width */
+}
+
+.grid-item {
+  height: 48px;
+  width: 48px;
+  object-fit: fill;
+  image-rendering: pixelated;
+}
+
+.clutter, .movable, .effect {
+  position: absolute;
+  outline: none;
+  filter: 
+    drop-shadow(3px 3px 0px rgba(0, 14, 95, 0.35))
+    drop-shadow(-3px 3px 0px rgba(95, 51, 0, 0.35));
+}
+
+/* Ground layered on bottom */
+.ground {
+  z-index: -1;
+}
+
+/* Clutter layered on top of bround */
+.clutter {
+  z-index: 0;
+}
+
+/* Movable layered on top of clutter */
+.movable {
+  z-index: 1;
+}
+
+/* Effect layered on top of movable */
+.effect {
+  z-index: 2;
+}
+
+.flip {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
