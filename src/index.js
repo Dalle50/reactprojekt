@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"; // Importing useEffect
 import ReactDOM from "react-dom";
 import Login from "./login";
 import useGameServer from "./useGameServer"; // Importing useGameServer hook
+import Chat from "./chat";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,7 +26,9 @@ function App() {
   return (
     <div>
       {!isLoggedIn && <Login onLogin={handleLogin} />}
-      {isLoggedIn && <div>You are logged in!</div>}
+      {isLoggedIn && <div>You are logged in!
+        <Chat /> {/*Placeholder, can be commented out, just used to illustrate. :3*/}
+      </div>}
     </div>
   );
 }
