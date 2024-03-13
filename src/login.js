@@ -16,13 +16,12 @@ function Login({ onLogin }) {
       });
 
       const data = await response.json();
-    //   console.log(data)
+      console.log(data)
       if (!response.ok || !data.success) {
         throw new Error(data.error || "Invalid credentials");
       }
 
-      // Login successful
-      onLogin(data.data); // Pass the token to the parent component
+      onLogin(data.data);
     } catch (error) {
       setError(error.message || "Invalid username or password");
     }
