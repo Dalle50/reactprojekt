@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import Login from "./login";
 import Chat from "./chat";
-import useGameServer from "./useGameServer";
 import Game from "./game";
 
 function App() {
