@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./game.css";
-function Gameboard({ server }) {
+function Gameboard({ server}) {
   const [gameState, setGameState] = useState(null);
   const [attackCooldown, setAttackCooldown] = useState(false);
   const [moveCooldown, setMoveCooldown] = useState(false);
