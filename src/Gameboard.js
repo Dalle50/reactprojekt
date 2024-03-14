@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "./game.css"; // Import the CSS file
-
+import "./game.css";
 function Gameboard({ server }) {
   const [gameState, setGameState] = useState(null);
   const [attackCooldown, setAttackCooldown] = useState(false);
   const [moveCooldown, setMoveCooldown] = useState(false);
+  const [biome, setBiome] = useState("");
+  const [xpos, setXpos] = useState(0);
+    const [ypos, setYpos] = useState(0);
   useEffect(() => {
     const handleWorldUpdate = (response) => {
       setGameState((prevState) => {
@@ -17,6 +19,9 @@ function Gameboard({ server }) {
           return response;
         }
       });
+      setBiome(response.info.biome);
+      setXpos(response.info.xpos);
+        setYpos(response.info.ypos);
     };
 
     server.onEvent("WorldUpdate", handleWorldUpdate);
@@ -105,11 +110,18 @@ function Gameboard({ server }) {
           >
             <div className="movable-info">
               {movable.tile === "p01" ? (
-                <span className={`grid-item movable ${movable.flipped ? "flip" : ""}`}>{movable.id}</span>
+                <span className={`grid-item movable ${movable.flipped ? "flip" : ""}`} >{movable.id}
+                <div className={`position-info`}>
+                    <br></br>
+                <p>X: {movable.xpos}</p>
+                <p>Y: {movable.ypos}</p>
+            </div>
+                </span>
               ) : (
                 <span className={`grid-item movable ${movable.flipped ? "flip" : ""}`}>{movable.tile}</span>
               )}
               <img src={`./tiles/tile_${movable.tile}.png`} alt={`Movable ${movable.tile}`} style={{ width: '48px', height: '48px' }} />
+              
             </div>
           </div>
         </div>
@@ -130,9 +142,15 @@ function Gameboard({ server }) {
     };
 
   return (
-    <div className="grid-container">
-      {renderTiles()}
+    <div className="game-container">
+      <div className="position-info">
+        <p>X: {xpos}</p>
+        <p>Y: {ypos}</p>
+        <p>Biome: {biome}</p>
+      </div>
+      <div className="grid-container">{renderTiles()}</div>
     </div>
+
   );
 }
 

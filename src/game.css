@@ -45,3 +45,13 @@
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.game-details,
+.position-info {
+  flex: 1;
+}
