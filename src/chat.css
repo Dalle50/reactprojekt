@@ -1,0 +1,7 @@
+.message-container {
+    background-color: white;
+    width: 220px;
+    border: 1px solid black; /* Border style shorthand */
+    height: 100px;
+  }
+  
