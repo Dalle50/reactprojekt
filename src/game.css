@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
+
 .grid-container {
   position: relative;
   display: grid;
@@ -19,6 +21,8 @@
     drop-shadow(3px 3px 0px rgba(0, 14, 95, 0.35))
     drop-shadow(-3px 3px 0px rgba(95, 51, 0, 0.35));
     top: -10px;
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 15px;
 }
 
 /* Ground layered on bottom */
@@ -51,11 +55,17 @@
 .game-info {
   display: flex;
   justify-content: space-between;
+  font-family: 'Pixelify Sans', sans-serif;
 }
 
 .game-details,
 .position-info {
-  flex: 1;
+  position: absolute;
+  top: 70px;
+  left: 10px;
+  z-index: 3; /* Ensure it's on top of other elements */
+  font-family: 'Pixelify Sans', sans-serif;
+  color: purple;
 }
 .player-name {
   color: rgb(0, 0, 0);   
@@ -64,4 +74,5 @@
   z-index: 3;
   left: -20px;
   font-weight: bold;
+  font-family: 'Pixelify Sans', sans-serif;
 }

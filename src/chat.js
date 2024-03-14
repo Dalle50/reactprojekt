@@ -47,7 +47,7 @@ function Chat({server}) {
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type your message here..."
                 />
-                <button onClick={handleSendMessage}>Send</button>
+                <button onClick={handleSendMessage} className='btn'>Send</button>
             </div>
         </div>
     );

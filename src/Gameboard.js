@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./game.css";
-function Gameboard({ server, onLogOut, onConnectionClosed   }) {
+function Gameboard({ server }) {
   const [gameState, setGameState] = useState(null);
   const [attackCooldown, setAttackCooldown] = useState(false);
   const [moveCooldown, setMoveCooldown] = useState(false);
+
   const [biome, setBiome] = useState("");
   const [xpos, setXpos] = useState(0);
     const [ypos, setYpos] = useState(0);
@@ -61,9 +62,7 @@ function Gameboard({ server, onLogOut, onConnectionClosed   }) {
           break;
         case "k":
           if (!attackCooldown) {
-
-            let combatLog = server.invoke("Attack");
-
+            server.invoke("Attack");
             setGameState(prevState => ({ ...prevState, effects: null })); // Remove effects after attack
               setTimeout(() => setGameState(prevState => ({ ...prevState, effects: null })), 200); // Remove effects after 1 second (adjust the duration as needed)
             setAttackCooldown(true);
@@ -82,22 +81,9 @@ function Gameboard({ server, onLogOut, onConnectionClosed   }) {
       window.removeEventListener("keydown", handleKeyPress);
     };
   }, [server, attackCooldown, moveCooldown]);
-  useEffect(() => {
-    const handleSocketClose = () => {
-      console.log("WebSocket connection closed");
-      onConnectionClosed(); // Call onConnectionClosed function when the socket is closed
-    };
 
-    if (server.connection) {
-      server.connection.onclose = handleSocketClose;
-    }
+  console.log(gameState);
 
-    return () => {
-      if (server.connection) {
-        server.connection.onclose = null;
-      }
-    };
-  }, [server, onConnectionClosed]);
   const renderTiles = () => {
     if (!gameState || !gameState.ground || !gameState.clutter || !gameState.movables) return null;
 
@@ -125,17 +111,16 @@ function Gameboard({ server, onLogOut, onConnectionClosed   }) {
           >
             <div className="movable-info">
               {movable.tile === "p01" ? (
-                <span className={`grid-item player-name movable ${movable.flipped ? "flip" : ""}`}>{movable.id}
+                                <span className={`grid-item player-name movable ${movable.flipped ? "flip" : ""}`} >{movable.id}
                 <div className={`position-info`}>
                     <br></br>
-                    <br></br>
-                <p>X: {movable.xpos}</p>
-                <p>Y: {movable.ypos}</p>
-            </div></span>
+            </div>
+                </span>
               ) : (
                 <span className={`grid-item movable ${movable.flipped ? "flip" : ""}`}>{movable.tile}</span>
               )}
               <img src={`./tiles/tile_${movable.tile}.png`} alt={`Movable ${movable.tile}`} style={{ width: '48px', height: '48px' }} />
+              
               
             </div>
           </div>
@@ -145,10 +130,10 @@ function Gameboard({ server, onLogOut, onConnectionClosed   }) {
     const attackEffect = gameState.effects ? (
         <div
           key={gameState.effects.id}
-          className={`grid-item ${gameState.effects.flipped ? "flip" : ""} effect`}
-          style={{ left: gameState.effects[0].xpos * 48, top: gameState.effects[0].ypos * 48 }}
+          className={`grid-item effect ${gameState.effects.flipped ? "flip" : ""}`}
+          style={{ left: gameState.effects.xpos * 48, top: gameState.effects.ypos * 48 }}
         >
-          <img className= "effect" src={`./tiles/tile_attack.png`} alt={`Attack Effect`} style={{width: '48px', height: '48px' }} />
+          <img src={`./tiles/tile_attack.png`} alt={`Attack Effect`} style={{ width: '48px', height: '48px' }} />
         </div>
       ) : null;
       
@@ -156,17 +141,14 @@ function Gameboard({ server, onLogOut, onConnectionClosed   }) {
       return [...groundTiles, ...clutterTiles, ...movableTiles, attackEffect];
     };
 
-  return (
-    <div className="game-container">
-      <div className="position-info">
-        <p>X: {xpos}</p>
-        <p>Y: {ypos}</p>
-        <p>Biome: {biome}</p>
+    return (
+      <div className="game-container">
+        <div className="position-info">
+          <p>[ X: {xpos} ] [ Y: {ypos} ] [ Biome: {biome} ] |</p>
+        </div>
+        <div className="grid-container">{renderTiles()}</div>
       </div>
-      <div className="grid-container">{renderTiles()}</div>
-    </div>
-
-  );
+    );
 }
 
 export default Gameboard;
