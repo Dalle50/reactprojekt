@@ -17,6 +17,7 @@
   filter: 
     drop-shadow(3px 3px 0px rgba(0, 14, 95, 0.35))
     drop-shadow(-3px 3px 0px rgba(95, 51, 0, 0.35));
+    top: -10px;
 }
 
 /* Ground layered on bottom */
@@ -32,7 +33,7 @@
 /* Movable layered on top of clutter */
 .movable {
   z-index: 1;
-}
+}w
 
 /* Effect layered on top of movable */
 .effect {
@@ -54,4 +55,12 @@
 .game-details,
 .position-info {
   flex: 1;
+}
+.player-name {
+  color: rgb(0, 0, 0);   
+  top: -25px;
+  filter: none;
+  z-index: 3;
+  left: -20px;
+  font-weight: bold;
 }
