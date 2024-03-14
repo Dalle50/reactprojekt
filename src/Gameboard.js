@@ -20,10 +20,6 @@ function Gameboard({ server }) {
 
     server.onEvent("WorldUpdate", handleWorldUpdate);
 
-    // Clean up event listener when component unmounts
-    return () => {
-      server.offEvent("WorldUpdate", handleWorldUpdate);
-    };
   }, [server]);
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 .message-container {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.5);
   width: 400px;
   border: 1px solid black;
   height: 200px;
@@ -16,4 +16,10 @@
 .input-container input {
 flex: auto;
   font-size:15px;
+}
+.chat-container {
+  position: absolute;
+  bottom: 160px;
+  left: 10px;
+  z-index: 1;
 }
