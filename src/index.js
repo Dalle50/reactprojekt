@@ -10,19 +10,22 @@ function App() {
   const [authToken, setToken] = useState(null);
 
   const handleLogin = (authToken) => {
-    if (authToken.success) {
+    if (!authToken.success) {
       console.log("Invalid credentials");
       setIsLoggedIn(false);
       return;
     }
     setIsLoggedIn(true);
-    setToken(authToken);
-    console.log("Auth : " + authToken);
+    setToken(authToken.data);
+    console.log("Auth : " + authToken.data);
   };
 
   const disconnectFromGame = () => {
     setIsLoggedIn(false);
     setToken(null);
+    console.log("Disconnected from game")
+    console.log("Auth : " + authToken.data)
+    console.log("Has been logged out")
   };
 
   return (
