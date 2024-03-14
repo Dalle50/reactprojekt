@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useGameServer from "./useGameServer";
+import Gameboard from "./Gameboard";
 
 function Game({ token, onLogOut }) {
   const gameHubUrl = "http://react.tsanas.com/gamehub";
@@ -22,7 +23,6 @@ function Game({ token, onLogOut }) {
     onLogOut(); // Call the onLogOut function passed as prop from App component
     setGameIsConnected(false);
   };
-
   return (
     <div>
       <h2>Game</h2>
@@ -36,8 +36,9 @@ function Game({ token, onLogOut }) {
       {gameIsConnected && (
         <>
           <div>Game is connected</div>
+          <Gameboard server={server} />
           <button id="disconnectBtn" onClick={disconnectFromGame}>
-            Disconnect from game
+            Logout
           </button>
         </>
       )}
