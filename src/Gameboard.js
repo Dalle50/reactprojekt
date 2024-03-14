@@ -105,7 +105,7 @@ function Gameboard({ server }) {
           >
             <div className="movable-info">
               {movable.tile === "p01" ? (
-                <span className={`grid-item movable ${movable.flipped ? "flip" : ""}`}>{movable.id}</span>
+                <span className={`grid-item player-name movable ${movable.flipped ? "flip" : ""}`}>{movable.id}</span>
               ) : (
                 <span className={`grid-item movable ${movable.flipped ? "flip" : ""}`}>{movable.tile}</span>
               )}
