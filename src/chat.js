@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import "./chat.css";
 
 function Chat({server}) {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
+    const messageContainerRef = useRef(null);
+
 
     const handleReceivedMessage = (message) => {
         setMessages(prevMessages => [...prevMessages, message]);
@@ -15,6 +17,14 @@ function Chat({server}) {
         }
     }, [server]);
 
+
+    useEffect(() => {
+        //Scrolls to the bottom so that user don't have to do that manually.
+        if (messageContainerRef.current) {
+            messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+        }
+    }, [messages]);
+
     const handleSendMessage = () => {
         if (server && message.trim() !== '') {
             server.invoke("Chat", message);
@@ -24,7 +34,7 @@ function Chat({server}) {
 
     return (
         <div className="chat-container">
-            <div className="message-container">
+            <div className="message-container" ref={messageContainerRef}>
                 {messages.map((message, index) => (
                     <div key={index} className="message">{message}
             </div>
