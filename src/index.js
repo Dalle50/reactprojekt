@@ -1,34 +1,28 @@
-import React, { useState, useEffect } from "react"; // Importing useEffect
+import React, { useState, useEffect, useSyncExternalStore, useCallback } from "react"; // Importing useEffect
 import ReactDOM from "react-dom";
 import Login from "./login";
-import useGameServer from "./useGameServer"; // Importing useGameServer hook
 import Chat from "./chat";
+import useGameServer from "./useGameServer";
+import Game from "./game";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [token, setToken] = useState(null);
-  var gameHubUrl = "http://react.tsanas.com/gamehub"
-  const gameServer = useGameServer(gameHubUrl, token); // Initialize the game server and pass token
-
-  useEffect(() => {
-    // Call the connect method of the game server when token changes
-    if (token) {
-      gameServer.connect();
-    }
-  }, [token, gameServer]);
-
-  const handleLogin = (token) => {
-    setIsLoggedIn(true);
-    setToken(token); // Store the token when the user is logged in
-    console.log(token);
+  const [authToken, setToken] = useState(null);
+  const gameHubUrl = "http://react.tsanas.com/gamehub";
+  const onConnectionClosed = (error) => {
+    console.error("Connection closed:", error);
   };
-
+  const [gameServer, setGameServer] = useState(null); // Declaring gameServer
+  const handleLogin = (authToken) => {
+    setIsLoggedIn(true);
+    setToken(authToken);
+    console.log("Auth : " + authToken);
+  };
+  
   return (
     <div>
       {!isLoggedIn && <Login onLogin={handleLogin} />}
-      {isLoggedIn && <div>You are logged in!
-        <Chat /> {/*Placeholder, can be commented out, just used to illustrate. :3*/}
-      </div>}
+      {isLoggedIn && authToken  && <Game token={ authToken } />}
     </div>
   );
 }

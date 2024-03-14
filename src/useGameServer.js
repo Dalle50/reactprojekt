@@ -28,7 +28,7 @@ function useGameServer(gameHubUrl, authToken, onConnectionClosed) {
   let connect = useCallback(() => {
     if (isConnectionNot(HubConnectionState.Disconnected))
       return;
-
+    console.log("Det her er token: " + authToken)
     console.log("Connecting to gameserver...");
     connection.start()
       .then(() => console.log("Successfully connected to gameserver!"))
