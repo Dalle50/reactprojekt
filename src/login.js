@@ -20,10 +20,11 @@ function Login({ onLogin }) {
       const data = await response.json();
       console.log(data)
       if (!response.ok || !data.success) {
+        onLogin(data);
         throw new Error(data.error || "Invalid credentials");
       }
 
-      onLogin(data.data);
+      onLogin(data);
     } catch (error) {
       setError(error.message || "Invalid username or password");
     }
