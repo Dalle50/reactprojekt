@@ -54,3 +54,13 @@
   left: -20px;
   font-weight: bold;
 }
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.game-details,
+.position-info {
+  flex: 1;
+}
