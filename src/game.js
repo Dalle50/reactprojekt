@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useGameServer from "./useGameServer";
+import Chat from "./chat";
 import Gameboard from "./Gameboard";
 
 function Game({ token, onLogOut }) {
@@ -26,11 +27,14 @@ function Game({ token, onLogOut }) {
   return (
     <div>
       <h2>Game</h2>
+      <button onClick={connectToGame}>Connect to game</button>
+
       {!gameIsConnected && (
         <>
           <button id="connectBtn" onClick={connectToGame}>
             Connect to game
           </button>
+      <Chat server={server} />
         </>
       )}
       {gameIsConnected && (
