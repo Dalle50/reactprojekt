@@ -3,7 +3,8 @@ import "./game.css"; // Import the CSS file
 
 function Gameboard({ server }) {
   const [gameState, setGameState] = useState(null);
-
+  const [attackCooldown, setAttackCooldown] = useState(false);
+  const [moveCooldown, setMoveCooldown] = useState(false);
   useEffect(() => {
     const handleWorldUpdate = (response) => {
       setGameState((prevState) => {
@@ -19,7 +20,6 @@ function Gameboard({ server }) {
     };
 
     server.onEvent("WorldUpdate", handleWorldUpdate);
-
   }, [server]);
 
   useEffect(() => {
@@ -27,19 +27,41 @@ function Gameboard({ server }) {
       const { key } = event;
       switch (key) {
         case "w":
-          server.invoke("MoveDirection", "up");
+          if (!moveCooldown) {
+            server.invoke("MoveDirection", "up");
+            setMoveCooldown(true);
+            setTimeout(() => setMoveCooldown(false), 150);
+          }
           break;
         case "a":
-          server.invoke("MoveDirection", "left");
+          if (!moveCooldown) {
+            server.invoke("MoveDirection", "left");
+            setMoveCooldown(true);
+            setTimeout(() => setMoveCooldown(false), 150);
+          }
           break;
         case "s":
-          server.invoke("MoveDirection", "down");
+          if (!moveCooldown) {
+            server.invoke("MoveDirection", "down");
+            setMoveCooldown(true);
+            setTimeout(() => setMoveCooldown(false), 150);
+          }
           break;
         case "d":
-          server.invoke("MoveDirection", "right");
+          if (!moveCooldown) {
+            server.invoke("MoveDirection", "right");
+            setMoveCooldown(true);
+            setTimeout(() => setMoveCooldown(false), 150);
+          }
           break;
         case "k":
-          server.invoke("Attack");
+          if (!attackCooldown) {
+            server.invoke("Attack");
+            setGameState(prevState => ({ ...prevState, effects: null })); // Remove effects after attack
+              setTimeout(() => setGameState(prevState => ({ ...prevState, effects: null })), 200); // Remove effects after 1 second (adjust the duration as needed)
+            setAttackCooldown(true);
+            setTimeout(() => setAttackCooldown(false), 250);
+          }
           break;
         default:
           break;
@@ -52,7 +74,7 @@ function Gameboard({ server }) {
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [server]);
+  }, [server, attackCooldown, moveCooldown]);
 
   console.log(gameState);
 
@@ -76,14 +98,22 @@ function Gameboard({ server }) {
     ));
 
     const movableTiles = gameState.movables.map((movable) => (
-      <div
-        key={movable.id}
-        className={`grid-item movable ${movable.flipped ? "flip" : ""}`}
-        style={{ left: movable.xpos * 48, top: movable.ypos * 48 }}
-      >
-        <img src={`./tiles/tile_${movable.tile}.png`} alt={`Movable ${movable.tile}`} style={{ width: '48px', height: '48px' }} />
-      </div>
-    ));
+        <div key={movable.id} className="movable-container">
+          <div
+            className={`grid-item movable ${movable.flipped ? "flip" : ""}`}
+            style={{ left: movable.xpos * 48, top: movable.ypos * 48 }}
+          >
+            <div className="movable-info">
+              {movable.tile === "p01" ? (
+                <span className={`grid-item movable ${movable.flipped ? "flip" : ""}`}>{movable.id}</span>
+              ) : (
+                <span className={`grid-item movable ${movable.flipped ? "flip" : ""}`}>{movable.tile}</span>
+              )}
+              <img src={`./tiles/tile_${movable.tile}.png`} alt={`Movable ${movable.tile}`} style={{ width: '48px', height: '48px' }} />
+            </div>
+          </div>
+        </div>
+      ));
     
     const attackEffect = gameState.effects ? (
         <div
