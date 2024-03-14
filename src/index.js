@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useSyncExternalStore, useCallback } from "react"; // Importing useEffect
 import ReactDOM from "react-dom";
 import Login from "./login";
+import Chat from "./chat";
 import useGameServer from "./useGameServer";
 import Game from "./game";
-
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

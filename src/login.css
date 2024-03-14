@@ -1,0 +1,39 @@
+.login-container {
+    text-align: center;
+    font-family: sans-serif;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: grayscale;
+    
+  }
+  .login-container h2 {
+    font-size: 50px;
+    margin-bottom:5px;
+  }
+  
+  .login-input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+  }
+  
+  .login-input input {
+    font-size: 15px;
+    font-family: sans-serif;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  
+  .login-input label {
+    font-size: 20px;
+    text-align: left;
+
+  }
+  
+  
+  .login-button button {
+    font-size: 20px;
+    font-family: sans-serif;
+  }
+  body {
+    background-color: lightsteelblue; /*Site background*/
+  }
