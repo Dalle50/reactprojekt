@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useGameServer from "./useGameServer";
 import Chat from "./chat";
 import Gameboard from "./Gameboard";
+import Combat from "./combatlog";
 
 function Game({ token, onLogOut }) {
   const gameHubUrl = "http://react.tsanas.com/gamehub";
@@ -37,8 +38,9 @@ function Game({ token, onLogOut }) {
       {gameIsConnected && (
         <>
           <div>Game is connected</div>
-          <Gameboard server={server} />
+          <Gameboard server={server} onLogOut={disconnectFromGame} onConnectionClosed={onConnectionClosed} />
           <Chat server={server} />
+          <Combat server={server} />
           <button id="disconnectBtn" onClick={disconnectFromGame}>
             Logout
           </button>

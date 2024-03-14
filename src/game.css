@@ -9,6 +9,7 @@
   width: 48px;
   object-fit: fill;
   image-rendering: pixelated;
+  position: relative;
 }
 
 .clutter, .movable, .effect {
@@ -33,7 +34,7 @@
 /* Movable layered on top of clutter */
 .movable {
   z-index: 1;
-}w
+}
 
 /* Effect layered on top of movable */
 .effect {

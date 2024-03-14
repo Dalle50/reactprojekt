@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./game.css";
-function Gameboard({ server }) {
+function Gameboard({ server, onLogOut, onConnectionClosed   }) {
   const [gameState, setGameState] = useState(null);
   const [attackCooldown, setAttackCooldown] = useState(false);
   const [moveCooldown, setMoveCooldown] = useState(false);
@@ -61,7 +61,9 @@ function Gameboard({ server }) {
           break;
         case "k":
           if (!attackCooldown) {
-            server.invoke("Attack");
+
+            let combatLog = server.invoke("Attack");
+
             setGameState(prevState => ({ ...prevState, effects: null })); // Remove effects after attack
               setTimeout(() => setGameState(prevState => ({ ...prevState, effects: null })), 200); // Remove effects after 1 second (adjust the duration as needed)
             setAttackCooldown(true);
@@ -80,9 +82,22 @@ function Gameboard({ server }) {
       window.removeEventListener("keydown", handleKeyPress);
     };
   }, [server, attackCooldown, moveCooldown]);
+  useEffect(() => {
+    const handleSocketClose = () => {
+      console.log("WebSocket connection closed");
+      onConnectionClosed(); // Call onConnectionClosed function when the socket is closed
+    };
 
-  console.log(gameState);
+    if (server.connection) {
+      server.connection.onclose = handleSocketClose;
+    }
 
+    return () => {
+      if (server.connection) {
+        server.connection.onclose = null;
+      }
+    };
+  }, [server, onConnectionClosed]);
   const renderTiles = () => {
     if (!gameState || !gameState.ground || !gameState.clutter || !gameState.movables) return null;
 
@@ -113,6 +128,7 @@ function Gameboard({ server }) {
                 <span className={`grid-item player-name movable ${movable.flipped ? "flip" : ""}`}>{movable.id}
                 <div className={`position-info`}>
                     <br></br>
+                    <br></br>
                 <p>X: {movable.xpos}</p>
                 <p>Y: {movable.ypos}</p>
             </div></span>
@@ -129,10 +145,10 @@ function Gameboard({ server }) {
     const attackEffect = gameState.effects ? (
         <div
           key={gameState.effects.id}
-          className={`grid-item effect ${gameState.effects.flipped ? "flip" : ""}`}
-          style={{ left: gameState.effects.xpos * 48, top: gameState.effects.ypos * 48 }}
+          className={`grid-item ${gameState.effects.flipped ? "flip" : ""} effect`}
+          style={{ left: gameState.effects[0].xpos * 48, top: gameState.effects[0].ypos * 48 }}
         >
-          <img src={`./tiles/tile_attack.png`} alt={`Attack Effect`} style={{ width: '48px', height: '48px' }} />
+          <img className= "effect" src={`./tiles/tile_attack.png`} alt={`Attack Effect`} style={{width: '48px', height: '48px' }} />
         </div>
       ) : null;
       
