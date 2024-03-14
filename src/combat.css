@@ -1,0 +1,19 @@
+.combat-message-container {
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent background */
+  color: yellow; /* Yellow text */
+  width: 400px;
+  border: 1px solid black;
+  height: 200px;
+  overflow-y: auto;
+}
+
+.combat-message {
+  margin-bottom: 5px;
+}
+
+.combat-container {
+  position: absolute;
+  bottom: 234px;
+  left: 810px;
+  z-index: 1;
+}

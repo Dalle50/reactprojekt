@@ -19,7 +19,7 @@ flex: auto;
 }
 .chat-container {
   position: absolute;
-  bottom: 160px;
+  bottom: 234px;
   left: 10px;
   z-index: 1;
 }
