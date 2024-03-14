@@ -27,20 +27,18 @@ function Game({ token, onLogOut }) {
   return (
     <div>
       <h2>Game</h2>
-      <button onClick={connectToGame}>Connect to game</button>
-
       {!gameIsConnected && (
         <>
           <button id="connectBtn" onClick={connectToGame}>
             Connect to game
           </button>
-      <Chat server={server} />
         </>
       )}
       {gameIsConnected && (
         <>
           <div>Game is connected</div>
           <Gameboard server={server} />
+          <Chat server={server} />
           <button id="disconnectBtn" onClick={disconnectFromGame}>
             Logout
           </button>
