@@ -1,7 +1,19 @@
 .message-container {
-    background-color: white;
-    width: 220px;
-    border: 1px solid black; /* Border style shorthand */
-    height: 100px;
-  }
-  
+  background-color: white;
+  width: 400px;
+  border: 1px solid black;
+  height: 200px;
+  overflow-y: auto;
+}
+.message {
+  margin-bottom: 5px;
+}
+.input-container {
+  width: 400px;
+  display: flex;
+  height: 30px;
+}
+.input-container input {
+flex: auto;
+  font-size:15px;
+}

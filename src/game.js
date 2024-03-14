@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useGameServer from "./useGameServer";
+import Chat from "./chat";
 
 function Game(token) {
     const gameHubUrl = "http://react.tsanas.com/gamehub";
@@ -14,6 +15,7 @@ function Game(token) {
     <div>
       <h2>Game</h2>
       <button onClick={connectToGame}>Connect to game</button>
+      <Chat server={server} />
     </div>
   );
 }
