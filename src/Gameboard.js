@@ -10,7 +10,7 @@ function Gameboard({ server, onLogOut, onConnectionClosed }) {
   const [xpos, setXpos] = useState(0);
   const [ypos, setYpos] = useState(0);
   const [attackSound] = useState(new Audio("/sounds/attack.mp3"));
-  attackSound.volume = 0.1;
+  attackSound.volume = 0.5;
   useEffect(() => {
     const handleWorldUpdate = (response) => {
       setGameState((prevState) => {
@@ -34,7 +34,8 @@ function Gameboard({ server, onLogOut, onConnectionClosed }) {
   useEffect(() => {
     const handleKeyPress = (event) => {
       const { key } = event;
-      switch (key) {
+      const lowercaseKey = key.toLowerCase();
+      switch (lowercaseKey) {
         case "w":
           if (!moveCooldown) {
             server.invoke("MoveDirection", "up");
@@ -121,7 +122,7 @@ function Gameboard({ server, onLogOut, onConnectionClosed }) {
         <img
           src={`./tiles/tile_${tile}.png`}
           alt={`Tile ${tile}`}
-          style={{ width: "48px", height: "48px", border: "1px solid black"}}
+          style={{ width: "48px", height: "48px"}}
         />
       </div>
     ));
@@ -153,8 +154,8 @@ function Gameboard({ server, onLogOut, onConnectionClosed }) {
                 <div className={`position-info`}>
                   <br></br>
                   <br></br>
-                  <p>X: {movable.xpos}</p>
-                  <p>Y: {movable.ypos}</p>
+                  {/* <p>X: {movable.xpos}</p>
+                  <p>Y: {movable.ypos}</p> */}
                 </div>
               </span>
             ) : (
@@ -192,7 +193,7 @@ function Gameboard({ server, onLogOut, onConnectionClosed }) {
 
   return (
     <div className="game-container">
-      <div className="position-info" style={{border: "1px solid black"}} >
+      <div className="position-info" >
         <p>X: {xpos}</p>
         <p>Y: {ypos}</p>
         <p>Biome: {biome}</p>
