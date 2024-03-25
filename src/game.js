@@ -14,6 +14,7 @@ function Game({ token, onLogOut }) {
     setGameIsConnected(false);
     clearInterval(themeIntervalId);
     themeSong.pause();
+    disconnectFromGame();
   };
 
   const [server] = useState(useGameServer(gameHubUrl, token, onConnectionClosed));
@@ -57,7 +58,7 @@ function Game({ token, onLogOut }) {
           <Gameboard server={server} onLogOut={disconnectFromGame} onConnectionClosed={onConnectionClosed} /> {/*Smider fejl idk why, den virker*/}
           <Chat server={server} />
           <Combat server={server} />
-          <button id="disconnectBtn" onClick={disconnectFromGame}>
+          <button id="disconnectBtn" onClick={disconnectFromGame} style={{marginLeft:'500px'}}>
             Logout
           </button>
         </>

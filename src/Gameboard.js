@@ -154,6 +154,7 @@ function Gameboard({ server, onLogOut, onConnectionClosed }) {
                 <div className={`position-info`}>
                   <br></br>
                   <br></br>
+                  {/* Board Position: */}
                   {/* <p>X: {movable.xpos}</p>
                   <p>Y: {movable.ypos}</p> */}
                 </div>
