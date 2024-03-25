@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
+
 .message-container {
   background-color: rgba(255, 255, 255, 0.5);
   width: 400px;
@@ -16,10 +18,17 @@
 .input-container input {
 flex: auto;
   font-size:15px;
+  font-family: 'Pixelify Sans', sans-serif;
 }
 .chat-container {
   position: absolute;
-  bottom: 234px;
+  bottom: 160px;
   left: 10px;
   z-index: 1;
+  font-size:15px;
+  font-family: 'Pixelify Sans', sans-serif;
+}
+.btn {
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 15px;
 }

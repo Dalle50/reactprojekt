@@ -5,6 +5,7 @@ function Gameboard({ server, onLogOut, onConnectionClosed }) {
   const [gameState, setGameState] = useState(null);
   const [attackCooldown, setAttackCooldown] = useState(false);
   const [moveCooldown, setMoveCooldown] = useState(false);
+
   const [biome, setBiome] = useState("");
   const [xpos, setXpos] = useState(0);
   const [ypos, setYpos] = useState(0);

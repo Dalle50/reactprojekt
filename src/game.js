@@ -54,7 +54,7 @@ function Game({ token, onLogOut }) {
       {gameIsConnected && (
         <>
           <div>Game is connected</div>
-          <Gameboard server={server} onLogOut={disconnectFromGame} onConnectionClosed={onConnectionClosed} />
+          <Gameboard server={server} onLogOut={disconnectFromGame} onConnectionClosed={onConnectionClosed} /> {/*Smider fejl idk why, den virker*/}
           <Chat server={server} />
           <Combat server={server} />
           <button id="disconnectBtn" onClick={disconnectFromGame}>
