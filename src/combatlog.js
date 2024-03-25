@@ -4,7 +4,7 @@ import "./combat.css";
 function Combat({ server }) {
     const [combatMessages, setCombatMessages] = useState([]);
     const combatMessageContainerRef = useRef(null);
-
+    const [attackSound] = useState(new Audio("/sounds/slain.mp3"));
     const handleReceivedCombatMessage = (message) => {
         setCombatMessages(prevCombatMessages => [...prevCombatMessages, message]);
     };

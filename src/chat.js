@@ -31,6 +31,11 @@ function Chat({server}) {
             setMessage('');
         }
     };
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            handleSendMessage();
+        }
+    };
 
     return (
         <div className="chat-container">
@@ -44,6 +49,7 @@ function Chat({server}) {
                 <input
                     type="text"
                     value={message}
+                    onKeyPress={handleKeyPress}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type your message here..."
                 />
