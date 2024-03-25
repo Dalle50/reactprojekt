@@ -61,7 +61,7 @@
 .game-details,
 .position-info {
   position: absolute;
-  top: 70px;
+  top: 200px;
   left: 10px;
   z-index: 3; /* Ensure it's on top of other elements */
   font-family: 'Pixelify Sans', sans-serif;

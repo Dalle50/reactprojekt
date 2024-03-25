@@ -22,7 +22,7 @@ flex: auto;
 }
 .chat-container {
   position: absolute;
-  bottom: 160px;
+  bottom: 90px;
   left: 10px;
   z-index: 1;
   font-size:15px;

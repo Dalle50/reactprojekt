@@ -193,6 +193,9 @@ function Gameboard({ server, onLogOut, onConnectionClosed }) {
 
   return (
     <div className="game-container">
+      <div><h3>Controls: wasd = Move around | k = attack</h3>
+      <p>Note: Game board must be focused to be playable</p>
+      </div>
       <div className="position-info" >
         <p>X: {xpos}</p>
         <p>Y: {ypos}</p>
